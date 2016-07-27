@@ -13,16 +13,16 @@
   <div class="city-detail">
     <section class="city-header">
       <h2>San Jose</h2>
-      <h4>Mostly Cloudy</h4>
-      <h1>49&deg;</h1>
+      <h4 id="currentSummary">Mostly Cloudy</h4>
+      <h1 id="currentTemp">49&deg;</h1>
     </section>
 
     <section class="today">
       <ul class="today-overview">
         <li>Saturday</li>
         <li></li>
-        <li>62&deg;</li>
-        <li>46&deg;</li>
+        <li id="todayHigh">62&deg;</li>
+        <li id="todayLow">46&deg;</li>
       </ul>
 
       <div class="today-hourly-list-container">
@@ -268,7 +268,7 @@
     </section>
 
     <section class="today-details">
-      <p class="today-summary">Today: Light rain on Saturday, with temperatures peaking at
+      <p class="today-summary" id="dailySummary">Today: Light rain on Saturday, with temperatures peaking at
       64&deg;F on Thursday.</p>
 
       <ul class="today-details-list">
@@ -289,13 +289,13 @@
         <li>
           <ul>
             <li>Chance of Rain:</li>
-            <li>0%</li>
+            <li id="rainChance">0%</li>
           </ul>
         </li>
         <li>
           <ul>
             <li>Humidity:</li>
-            <li>86%</li>
+            <li id="humidity">86%</li>
           </ul>
         </li>
         <li>
