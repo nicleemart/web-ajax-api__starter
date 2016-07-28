@@ -34,7 +34,7 @@ window.addEventListener("load", function(){
 			wind.innerHTML = Math.round(apiResponse.daily.data[0].windSpeed) + " mph " + degToCompass(apiResponse.daily.data[0].windBearing);
 			feelsLike.innerHTML = Math.round(apiResponse.daily.data[0].apparentTemperatureMax) + "&deg;";
 			precipAmount.innerHTML = apiResponse.daily.data[0].precipIntensity + " in";
-			pressure.innerHTML = apiResponse.daily.data[0].pressure;
+			pressure.innerHTML = Math.round(29.92 * apiResponse.daily.data[0].pressure / 1013.25) + " in";
 			visibility.innerHTML = apiResponse.daily.data[0].visibility + " mi";
 			populateHourlyTemps(apiResponse.hourly.data);
 			populateDailyHighs(apiResponse.daily.data);
@@ -55,7 +55,7 @@ window.addEventListener("load", function(){
     function populateHourlyTemps (hourlyData){
     	var tempArr = document.getElementsByClassName("hourlyTemp");
     	for (i = 0; i < tempArr.length; i++){
-    		tempArr[i].innerHTML = Math.round(hourlyData[i].temperature) + "&deg;";
+    		tempArr[i].innerHTML = Math.round(hourlyData[i+7].temperature) + "&deg;";
     	}
     }
 
