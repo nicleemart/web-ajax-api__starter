@@ -5,6 +5,7 @@ window.addEventListener("load", function(){
 		apiRequest.addEventListener("load", function(e){
 
 			var apiResponse = JSON.parse(e.target.responseText);
+			debugger;
 
 			var currentSummary = document.getElementById("currentSummary");
 			var currentTemp = document.getElementById("currentTemp");
@@ -25,7 +26,7 @@ window.addEventListener("load", function(){
 			currentTemp.innerHTML = Math.round(apiResponse.currently.apparentTemperature) + "&deg;";
 			todayHigh.innerHTML = Math.round(apiResponse.daily.data[0].temperatureMax) + "&deg;";
 			todayLow.innerHTML = Math.round(apiResponse.daily.data[0].temperatureMin) + "&deg;";
-			dailySummary.innerHTML = apiResponse.daily.summary;
+			dailySummary.innerHTML = "Today: " + apiResponse.daily.summary;
 			sunrise.innerHTML = convertTime(apiResponse.daily.data[0].sunriseTime);
 			sunset.innerHTML = convertTime(apiResponse.daily.data[0].sunsetTime);
 			rainChance.innerHTML = apiResponse.daily.data[0].precipProbability + "%";
@@ -36,6 +37,8 @@ window.addEventListener("load", function(){
 			pressure.innerHTML = apiResponse.daily.data[0].pressure;
 			visibility.innerHTML = apiResponse.daily.data[0].visibility + " mi";
 			populateHourlyTemps(apiResponse.hourly.data);
+			populateDailyHighs(apiResponse.daily.data);
+			populateDailyLows(apiResponse.daily.data);
 
 		});
 
@@ -55,5 +58,19 @@ window.addEventListener("load", function(){
     		tempArr[i].innerHTML = Math.round(hourlyData[i].temperature) + "&deg;";
     	}
     }
+
+  	function populateDailyHighs (highData){
+    	var highArr = document.getElementsByClassName("dailyHigh");
+    	for (i = 0; i < highArr.length; i++){
+    		highArr[i].innerHTML = Math.round(highData[i].temperatureMax) + "&deg;";
+    	}
+    }
+
+	function populateDailyLows (lowData){
+    	var lowArr = document.getElementsByClassName("dailyLow");
+    	for (i = 0; i < lowArr.length; i++){
+    		lowArr[i].innerHTML = Math.round(lowData[i].temperatureMin) + "&deg;";
+    	}
+    }   
 
 });
