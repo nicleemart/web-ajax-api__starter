@@ -5,7 +5,7 @@ window.addEventListener("load", function(){
 		apiRequest.addEventListener("load", function(e){
 
 			var apiResponse = JSON.parse(e.target.responseText);
-		debugger;
+
 			var currentSummary = document.getElementById("currentSummary");
 			var currentTemp = document.getElementById("currentTemp");
 			var todayHigh = document.getElementById("todayHigh");
@@ -35,6 +35,7 @@ window.addEventListener("load", function(){
 			precipAmount.innerHTML = apiResponse.daily.data[0].precipIntensity + " in";
 			pressure.innerHTML = apiResponse.daily.data[0].pressure;
 			visibility.innerHTML = apiResponse.daily.data[0].visibility + " mi";
+			populateHourlyTemps(apiResponse.hourly.data);
 
 		});
 
@@ -46,6 +47,13 @@ window.addEventListener("load", function(){
 		var hours = date.getHours();
 		var minutes = "0" + date.getMinutes();
 		return hours + ':' + minutes.substr(-2);
+    }
+
+    function populateHourlyTemps (hourlyData){
+    	var tempArr = document.getElementsByClassName("hourlyTemp");
+    	for (i = 0; i < tempArr.length; i++){
+    		tempArr[i].innerHTML = Math.round(hourlyData[i].temperature) + "&deg;";
+    	}
     }
 
 });
