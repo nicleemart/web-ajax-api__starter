@@ -31,7 +31,7 @@ window.addEventListener("load", function(){
 			sunset.innerHTML = convertTime(apiResponse.daily.data[0].sunsetTime);
 			rainChance.innerHTML = apiResponse.daily.data[0].precipProbability + "%";
 			humidity.innerHTML = apiResponse.daily.data[0].humidity * 100 + "%";
-			wind.innerHTML = apiResponse.daily.data[0].windSpeed;
+			wind.innerHTML = Math.round(apiResponse.daily.data[0].windSpeed) + " mph " + degToCompass(apiResponse.daily.data[0].windBearing);
 			feelsLike.innerHTML = Math.round(apiResponse.daily.data[0].apparentTemperatureMax) + "&deg;";
 			precipAmount.innerHTML = apiResponse.daily.data[0].precipIntensity + " in";
 			pressure.innerHTML = apiResponse.daily.data[0].pressure;
@@ -72,5 +72,11 @@ window.addEventListener("load", function(){
     		lowArr[i].innerHTML = Math.round(lowData[i].temperatureMin) + "&deg;";
     	}
     }   
+
+    function degToCompass(num) {
+            var val = Math.floor((num / 45) + 0.5);
+            var arr = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+            return arr[(val % 8)];
+        }
 
 });
